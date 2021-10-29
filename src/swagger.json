@@ -1,0 +1,80 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "API Documentation",
+    "description": " API Documentation - Challenge",
+    "version": "1.0.0",
+    "contact": {
+      "email": "omirandavictor@gmail.com"
+    }
+  },
+  "paths": {
+    "/users": {
+      "post": {
+        "tags": ["User"],
+        "summary": "Create a user",
+        "description": "Create a new User",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "email": {
+                    "type": "string"
+                  }
+                },
+                "example": {
+                  "name": "Name Test",
+                  "email": "name@test.com"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Email already taken"
+          }
+        }
+      },
+      "get": {
+        "tags": ["User"],
+        "summary": "List all users",
+        "description": "Lists all users only when the request is an administrator"
+      }
+    },
+    "/users/:user_id/admin": {
+      "patch": {
+        "tags": ["Users"],
+        "summary": "Turn user admin",
+        "description": "Turn a user admin",
+        "parameters": [{
+          "name": "user_id",
+          "in": "path",
+          "required": true,
+          "format": "uuid"
+        }]
+      }
+    },
+    "/users/:user_id": {
+      "get": {
+        "tags": ["Users"],
+        "summary": "Get user ",
+        "description": "Get a user with user_id",
+        "parameters": [{
+          "name": "user_id",
+          "in": "path",
+          "required": true,
+          "format": "uuid"
+        }]
+      }
+    }
+  }
+} 
